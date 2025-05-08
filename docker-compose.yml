@@ -1,0 +1,92 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: myhotel
+      POSTGRES_USER: payylayss
+      POSTGRES_PASSWORD: payylayss
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+
+  auth-service:
+    build:
+      context: ./services/backend/auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - DB_USER=payylayss
+      - DB_PASSWORD=payylayss
+      - DB_HOST=db
+      - DB_NAME=myhotel
+      - JWT_SECRET_KEY=super-secret-key
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  hotel-service:
+    build:
+      context: ./services/backend/hotel-service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      - DB_USER=payylayss
+      - DB_PASSWORD=payylayss
+      - DB_HOST=db
+      - DB_NAME=myhotel
+      - JWT_SECRET_KEY=super-secret-key
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  booking-service:
+    build:
+      context: ./services/backend/booking-service
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+    environment:
+      - DB_USER=payylayss
+      - DB_PASSWORD=payylayss
+      - DB_HOST=db
+      - DB_NAME=myhotel
+      - JWT_SECRET_KEY=super-secret-key
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  user-app:
+    build:
+      context: ./services/frontend/user-app
+      dockerfile: Dockerfile
+    ports:
+      - "5174:80"
+    networks:
+      - app-network
+
+  admin-app:
+    build:
+      context: ./services/frontend/admin-app
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - user-app  # Ensure user-app is built first
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata:
