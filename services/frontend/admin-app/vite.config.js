@@ -7,7 +7,7 @@ import svgr from '@svgr/rollup';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    base: process.env.VITE_BASE_PATH || "/myhotel",
+    base: "/",
     resolve: {
         alias: {
             src: resolve(__dirname, 'src'),

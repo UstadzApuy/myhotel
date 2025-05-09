@@ -15,4 +15,4 @@ COPY wait-for-postgres.sh /wait-for-postgres.sh
 RUN chmod +x /wait-for-postgres.sh
 
 # Use gunicorn for production
-CMD  gunicorn --bind 0.0.0.0:$PORT app:app
+CMD flask run --host=0.0.0.0 --port=8080
