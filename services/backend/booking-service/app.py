@@ -14,7 +14,7 @@ jwt = JWTManager(app)
 CORS(app, resources={r"/*": {"origins": [
     "http://localhost:5173",
     "http://localhost:5174",
-    "https://your-vercel-frontend-domain.vercel.app"  # Add Vercel domain
+    "https://myhotel-zeta.vercel.app/"  # Add Vercel domain
 ]}}, supports_credentials=True)
 
 with app.app_context():
