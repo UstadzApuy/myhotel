@@ -17,4 +17,6 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
+RUN cat /etc/nginx/conf.d/default.conf
+
 CMD ["nginx", "-g", "daemon off;"]
