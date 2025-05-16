@@ -1,7 +1,7 @@
 from flask import Flask
 from config import Config
 from database.db import db
-from models.user import Room 
+from models.user import User 
 
 app = Flask(__name__)
 app.config.from_object(Config)
