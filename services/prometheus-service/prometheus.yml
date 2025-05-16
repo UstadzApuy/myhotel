@@ -1,0 +1,20 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "alert.rules.yml"
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+  - job_name: 'auth_service'
+    static_configs:
+      - targets: ['auth-service.railway.internal:8080']
+  - job_name: 'booking_service'
+    static_configs:
+      - targets: ['booking-service.railway.internal:8080']
+  - job_name: 'hotel_service'
+    static_configs:
+      - targets: ['hotel-service.railway.internal:8080']
