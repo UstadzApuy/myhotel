@@ -20,9 +20,6 @@ CORS(app, resources={r"/*": {"origins": [
 # Inisialisasi Prometheus Metrics
 metrics = PrometheusMetrics(app)
 
-with app.app_context():
-    db.create_all()
-
 app.register_blueprint(room_bp)
 
 if __name__ == '__main__':
