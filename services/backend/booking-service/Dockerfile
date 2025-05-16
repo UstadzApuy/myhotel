@@ -13,5 +13,5 @@ COPY . .
 COPY wait-for-postgres.sh /wait-for-postgres.sh
 RUN chmod +x /wait-for-postgres.sh
 
-# Use gunicorn for production
-CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
+# Optimized Gunicorn command
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--threads", "2", "--timeout", "60", "--worker-class", "gthread", "app:app"]

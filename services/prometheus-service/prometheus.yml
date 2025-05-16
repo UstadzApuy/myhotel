@@ -11,10 +11,10 @@ scrape_configs:
       - targets: ['localhost:9090']
   - job_name: 'auth_service'
     static_configs:
-      - targets: ['auth-service.railway.internal:8080']
+      - targets: ['auth-service-production-b865.up.railway.app:8080']
   - job_name: 'booking_service'
     static_configs:
-      - targets: ['booking-service.railway.internal:8080']
+      - targets: ['booking-service-production-8993.up.railway.app:8080']
   - job_name: 'hotel_service'
     static_configs:
-      - targets: ['hotel-service.railway.internal:8080']
+      - targets: ['hotel-service-production.up.railway.app:8080']
