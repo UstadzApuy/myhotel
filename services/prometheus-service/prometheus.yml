@@ -18,3 +18,9 @@ scrape_configs:
   - job_name: 'hotel_service'
     static_configs:
       - targets: ['hotel-service-production.up.railway.app:8080']
+  - job_name: 'admin_app'
+    static_configs:
+      - targets: ['admin-app-production-ae7e.up.railway.app:80']
+  - job_name: 'user_app'
+    static_configs:
+      - targets: ['user-app-production-ee23.up.railway.app:80']
