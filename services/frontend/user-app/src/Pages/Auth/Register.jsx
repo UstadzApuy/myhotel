@@ -19,7 +19,7 @@ export function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5001/api/auth/register", {
+      await axios.post("http://auth-service-production-b865.up.railway.app/api/auth/register", {
         name,
         email,
         password,
