@@ -1,0 +1,51 @@
+[project]
+name = "myhotel"
+
+[env]
+JWT_SECRET_KEY = "your_jwt_secret_key_here"
+
+[[services]]
+name = "auth-service"
+path = "services/backend/auth-service"
+dockerfile = "Dockerfile"
+env = [
+  "RAILWAY_POSTGRES_USER",
+  "RAILWAY_POSTGRES_PASSWORD",
+  "RAILWAY_POSTGRES_HOST",
+  "RAILWAY_POSTGRES_DB",
+  "JWT_SECRET_KEY"
+]
+
+[[services]]
+name = "hotel-service"
+path = "services/backend/hotel-service"
+dockerfile = "Dockerfile"
+env = [
+  "RAILWAY_POSTGRES_USER",
+  "RAILWAY_POSTGRES_PASSWORD",
+  "RAILWAY_POSTGRES_HOST",
+  "RAILWAY_POSTGRES_DB",
+  "JWT_SECRET_KEY"
+]
+
+[[services]]
+name = "booking-service"
+path = "services/backend/booking-service"
+dockerfile = "Dockerfile"
+env = [
+  "RAILWAY_POSTGRES_USER",
+  "RAILWAY_POSTGRES_PASSWORD",
+  "RAILWAY_POSTGRES_HOST",
+  "RAILWAY_POSTGRES_DB",
+  "JWT_SECRET_KEY"
+]
+
+[[services]]
+name = "user-app"
+path = "services/frontend/user-app"
+dockerfile = "Dockerfile"
+
+[[services]]
+name = "admin-app"
+path = "services/frontend/admin-app"
+dockerfile = "Dockerfile"

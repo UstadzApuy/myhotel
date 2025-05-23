@@ -1,0 +1,72 @@
+services:
+  auth-service:
+    build:
+      context: ./services/backend/auth-service
+      dockerfile: Dockerfile
+    environment:
+      - DB_USER=${RAILWAY_POSTGRES_USER}
+      - DB_PASSWORD=${RAILWAY_POSTGRES_PASSWORD}
+      - DB_HOST=${RAILWAY_POSTGRES_HOST}
+      - DB_NAME=${RAILWAY_POSTGRES_DB}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    depends_on:
+      - hotel-service
+      - booking-service
+    networks:
+      - app-network
+
+  hotel-service:
+    build:
+      context: ./services/backend/hotel-service
+      dockerfile: Dockerfile
+    environment:
+      - DB_USER=${RAILWAY_POSTGRES_USER}
+      - DB_PASSWORD=${RAILWAY_POSTGRES_PASSWORD}
+      - DB_HOST=${RAILWAY_POSTGRES_HOST}
+      - DB_NAME=${RAILWAY_POSTGRES_DB}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    depends_on:
+      - auth-service
+      - booking-service
+    networks:
+      - app-network
+
+  booking-service:
+    build:
+      context: ./services/backend/booking-service
+      dockerfile: Dockerfile
+    environment:
+      - DB_USER=${RAILWAY_POSTGRES_USER}
+      - DB_PASSWORD=${RAILWAY_POSTGRES_PASSWORD}
+      - DB_HOST=${RAILWAY_POSTGRES_HOST}
+      - DB_NAME=${RAILWAY_POSTGRES_DB}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+    depends_on:
+      - auth-service
+      - hotel-service
+    networks:
+      - app-network
+
+  user-app:
+    build:
+      context: ./services/frontend/user-app
+      dockerfile: Dockerfile
+    ports:
+      - "5174:80"
+    networks:
+      - app-network
+
+  admin-app:
+    build:
+      context: ./services/frontend/admin-app
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - user-app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
