@@ -3,7 +3,7 @@ import os
 
 class Config:
     # Use DATABASE_URL if available (Railway), otherwise construct from individual variables
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL") or (
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_PUBBLIC_URL") or (
         f"postgresql://{os.getenv('DB_USER', 'payylayss')}:"
         f"{os.getenv('DB_PASSWORD', 'payylayss')}@"
         f"{os.getenv('DB_HOST', 'localhost')}/"
