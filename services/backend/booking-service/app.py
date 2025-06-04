@@ -12,13 +12,12 @@ app.config.from_object(Config)
 db.init_app(app)
 jwt = JWTManager(app)
 CORS(app, resources={r"/*": {"origins": [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://admin-app-production-ae7e.up.railway.app",
-    "http://user-app-production-ee23.up.railway.app",
-    "http://prometheus-service-production.up.railway.app"
+    os.getenv("http://auth-service-production-b865.up.railway.app"),
+    os.getenv("http://booking-service-production-8993.up.railway.app"),
+    os.getenv("http://hotel-service-production.up.railway.app"),
+    os.getenv("http://admin-app-production-ae7e.up.railway.app"),
+    os.getenv("http://user-app-production-ee23.up.railway.app"),
 ]}}, supports_credentials=True)
-
 # Inisialisasi Prometheus Metrics
 metrics = PrometheusMetrics(app)
 
