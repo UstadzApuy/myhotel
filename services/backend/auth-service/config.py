@@ -1,13 +1,11 @@
-# services/backend/semua service/config.py
 import os
 
 class Config:
-    # Use DATABASE_URL if available (Railway), otherwise construct from individual variables
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_PUBLIC_URL") or (
-        f"postgresql://{os.getenv('DB_USER', 'payylayss')}:"
-        f"{os.getenv('DB_PASSWORD', 'payylayss')}@"
-        f"{os.getenv('DB_HOST', 'localhost')}/"
-        f"{os.getenv('DB_NAME', 'myhotel')}"
+    SQLALCHEMY_DATABASE_URI = (
+        f"postgresql://{os.getenv('DB_USER')}:" 
+        f"{os.getenv('DB_PASSWORD')}@"
+        f"{os.getenv('DB_HOST')}/"
+        f"{os.getenv('DB_NAME')}"
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY", "super-secret-key")
